@@ -8,6 +8,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={ <pages.Login /> } />
         <Route exact path="/exemplo" element={ <pages.Exemplo /> } />
+        <Route exact path="/customer/products" element={ <pages.Home /> } />
       </Routes>
     </div>
   );
