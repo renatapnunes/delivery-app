@@ -1,8 +1,9 @@
 const express = require('express');
-const getProducts = require('./getProducts');
+const user = require('./index');
 
 const router = express.Router({ mergeParams: true });
 
-router.get('/', getProducts);
+router.post('/login', user.findUser);
+router.post('/register', user.createUser);
 
 module.exports = router;

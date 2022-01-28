@@ -1,0 +1,38 @@
+- [x] problema com o teste (banco de dados não encontrado)
+- [x] eliminar o Exemplo
+- [x] comentar sobre a mudança do arquivo de rota
+- [x] user => costumer = cliente
+- [x] mudança dos nomes das tabelas no migration/seeds/models(tableName) para minúsculo
+
+- [] AVISO #1
+- [] AVIDO #2
+
+
+- PROPOSTA PRÓXIMOS DIAS
+
+final de semana (Luís, Renata, André):
+- [x] Tela Fluxo comum 
+- [] Tela Fluxo cliente 
+- [] Tela Fluxo pessoa vendedora (André)
+
+final de semana (Guilherme, Luan):
+- [] Dedicação ao WebChat
+- [] Finalizado Webchat junta ao time para delivery
+
+Segunda-feira/Terça- feira  (Time Delivery App)
+- [] Tela Validação de status perdido
+- [] Tela Fluxo pessoa Administradora (André)
+
+Quarta-feira (Time Delivery App)
+- [] CSS
+
+Quinta-feira (Time Delivery App)
+- [] Preparação da apresentação
+
+Sexta-feira (Time Delivery App)
+- [] Apresentação
+
+** Teste & afins para depois dessa data.
+
+
+
