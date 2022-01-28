@@ -1,15 +1,20 @@
 const Sales = (sequelize, DataTypes) => {
   const Sales = sequelize.define('Sales',
   {
-    total_price: DataTypes.DECIMAL(9, 2),
-    delivery_address: DataTypes.STRING(100),
-    delivery_number: DataTypes.STRING(50),
-    sale_date: DataTypes.DATE,
+    userId: { type: DataTypes.INTEGER, foreignKey: true },
+    sellerId: { type: DataTypes.INTEGER, foreignKey: true },
+    totalPrice: DataTypes.DECIMAL(9, 2),
+    deliveryAddress: DataTypes.STRING(100),
+    deliveryNumber: DataTypes.STRING(50),
+    saleDate: DataTypes.DATE,
     status: DataTypes.STRING
   },
   {
-    timestamps: false,
-    tableName: "sales"
+    timestamps: true,
+    tableName: 'sales',
+    underscored: true,
+    updatedAt: false,
+    createdAt: 'saleDate',
   });
 
   Sales.associate = (models) => {

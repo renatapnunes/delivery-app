@@ -15,7 +15,6 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
-        primaryKey: true,
         allowNull: false,
       },
       seller_id: {
@@ -26,7 +25,6 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
-        primaryKey: true,
         allowNull: false,
       },
       total_price: {
@@ -41,9 +39,10 @@ module.exports = {
         type: Sequelize.STRING(50),
         allowNull: false,
       },
-      sale_date: {
+      createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
+        field: 'sale_date',
       },
       status: {
         type: Sequelize.STRING(50),

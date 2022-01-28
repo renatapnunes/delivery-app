@@ -3,10 +3,11 @@ const Products = (sequelize, DataTypes) => {
   {
     name: DataTypes.STRING,
     price: DataTypes.DECIMAL(4, 2),
-    url_image: DataTypes.STRING(200),
+    urlImage: DataTypes.STRING(200),
   },
   {
     timestamps: false,
+    underscored: true,
     tableName: "products"
   });
 
