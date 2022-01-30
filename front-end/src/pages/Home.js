@@ -1,34 +1,61 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Card } from '../components';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Card, Header } from '../components';
+import constant from '../utils/constants';
 import http from '../services/api';
+import dataTestIds from '../utils/dataTestIds';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [localInfo, setLocalInfo] = useState('');
-  const { current: { token } } = useRef(JSON.parse(localStorage.getItem('user') || ''));
+  const [loading, setLoading] = useState(true);
+  const store = useSelector((state) => state.products);
+  const navigate = useNavigate();
+  const { current: { token } } = useRef(JSON.parse(localStorage.getItem('user')) || '');
 
-  const getAllProducts = async () => {
-    setLoading(true);
-    setProducts(await http.getAllProducts());
-    setLoading(false);
-  };
+  const { products: prods } = store;
+  const total = prods.reduce((acc, elem) => acc + elem.totalValue, 0);
 
-  useEffect(() => { getAllProducts(); }, []);
+  useEffect(() => {
+    const getAllProducts = async () => {
+      const result = await http.getProducts({ token });
+      if (result === constant.UNAUTHORIZED || !token) return navigate('/login');
+      setProducts(result);
+      setLoading(false);
+    };
 
-  if (loading) return <p>Carregando...</p>;
+    getAllProducts();
+  }, [navigate, token]);
+
+  if (loading) return <h1>Carregando</h1>;
+
   return (
-    <div>
-      <div style={ { display: 'flex', flexDirection: 'row', flexWrap: 'wrap' } }>
+    <div className="products-container">
+      <Header />
+      <button
+        type="button"
+        disabled={ total <= 0 }
+        data-testid={ dataTestIds[79] }
+        onClick={ () => navigate('/customer/checkout') }
+      >
+        <h3
+          data-testid={ dataTestIds[21] }
+        >
+          {
+            `Ver carrinho: R$ ${(parseFloat(total).toFixed(2)).replace('.', ',')}`
+          }
+        </h3>
+      </button>
+      <div className="products-cards-container">
         {
-          products.map(({ name, price, urlImage, id }) => (
+          products.map(({ name, price, urlImage, id, quantity }) => (
             <Card
               thumb={ urlImage }
               name={ name }
-              // onClick={ handleCategoryClick }
               price={ price }
               key={ id }
               id={ id }
+              quantity={ quantity }
             />
           ))
         }

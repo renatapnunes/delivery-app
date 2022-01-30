@@ -1,7 +1,4 @@
 {
   "root": true,
-  "extends": ["trybe-frontend"],
-  "rules": {
-    "no-unused-vars": "off"
-  }
+  "extends": ["trybe-frontend"]
 }

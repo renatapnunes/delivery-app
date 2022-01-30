@@ -19,6 +19,7 @@ function Login() {
   const handleLoginButton = async (email, password) => {
     const user = await http.findUser({ email, password });
     if (user === constant.PAGE_404) return setMensagemError(true);
+
     setMensagemError(false);
     window.localStorage.setItem('user', JSON.stringify(user));
     switch (user.role) {

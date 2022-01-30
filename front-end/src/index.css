@@ -11,3 +11,41 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.products-cards-container {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-evenly;
+  padding-bottom: 6em;
+}
+
+.product-card {
+  display: inline-block;
+  border: transparent;
+  border-radius: 9px;
+  box-shadow: 0 0 9px rgb(195, 195, 195);
+  height: 15em;
+  margin: 1em;
+  width: 15em;
+}
+
+.thumb {
+  border-radius: 9px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  height: 10rem;
+  width: 10rem;
+}
+
+
+/* Esses atributos abaixo servem para retirar as flechas do input de number dos cards de produto.
+Link que eu achei essa solução: https://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box, resposta do user Josh Crozier  */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import addProduct from '../redux/actions/producActions';
+import updateProduct from '../redux/actions/productActions';
 
 const testIds = {
   15: 'customer_products__element-card-title-',
@@ -13,59 +13,90 @@ const testIds = {
 };
 
 const Card = ({ id, thumb, name, price }) => {
-  const [inputQuantity, setInputQuantity] = useState(0);
-  const [idValue, setIdValue] = useState(0);
-  const [priceValue, setPriceValue] = useState(0);
   const dispatch = useDispatch();
+  const [inputValue, setInputValue] = useState(0);
+  const [suit, setSuit] = useState(false);
+  const [cardInfo] = useState(
+    {
+      id,
+      quantity: 0,
+      totalValue: '',
+      price: parseFloat(price),
+    },
+  );
 
-  const handleButton = (e) => {
-    setInputQuantity(inputQuantity + 1);
-    setIdValue(id);
-    setPriceValue(price);
+  const inputControl = ({ value }) => {
+    setSuit(true);
+    setInputValue(parseInt(value, 10));
+  };
+
+  const handleChange = (btnName) => {
+    if (btnName === 'addButton') {
+      setSuit(true);
+      return setInputValue(inputValue + 1);
+    }
+
+    if (inputValue > 0) setInputValue(inputValue - 1);
   };
 
   useEffect(() => {
-    dispatch(addProduct({ id: idValue, quantity: inputQuantity }));
-  }, [inputQuantity]);
+    if (suit) {
+      const totalValue = parseFloat((inputValue * cardInfo.price).toFixed(2));
+      const quantity = inputValue;
+
+      dispatch(updateProduct({ ...cardInfo, totalValue, quantity }));
+    }
+  }, [inputValue]);
 
   return (
-    <div>
+    <div
+      className="product-card"
+    >
       <h3
         data-testid={ `${testIds[16]}${id}` }
       >
-        {price}
+        { `R$ ${price.replace('.', ',')}` }
       </h3>
-      <img
-        style={ { width: '80px' } }
-        data-testid={ `${testIds[17]}${id}` }
-        src={ thumb }
-        alt={ `Uma garrafa de ${name}` }
-      />
+      <div className="image-container">
+        <img
+          data-testid={ `${testIds[17]}${id}` }
+          src={ thumb }
+          alt={ `Uma garrafa de ${name}` }
+          className="thumb"
+        />
+      </div>
       <span
         data-testid={ `${testIds[15]}${id}` }
       >
         { name }
       </span>
-      <div>
+      <div className="buttons">
         <button
+          value={ price }
           type="button"
+          onClick={ (e) => handleChange(e.target.name) }
+          id={ id }
           data-testid={ `${testIds[18]}${id}` }
-          onClick={ (e) => handleButton(e) }
+          name="addButton"
         >
           +
         </button>
-        <span
-          data-testid={ `${testIds[20]}${id}` }
-        >
-          0
-        </span>
         <input
-          value={ inputQuantity }
-          onChange={ (e) => setInputQuantity(e.target.value) }
+          name="inputQuantity"
+          id={ id }
+          value={ inputValue }
+          onChange={ (e) => setInputValue(e.target.value) }
+          onKeyPress={ (e) => inputControl(e.target) }
+          type="number"
+          data-testid={ `${testIds[20]}${id}` }
         />
         <button
+          id={ id }
+          value={ price }
           type="button"
+          onClick={ (e) => handleChange(e.target.name) }
           data-testid={ `${testIds[19]}${id}` }
+          name="subButton"
         >
           -
         </button>
