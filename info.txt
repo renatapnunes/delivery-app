@@ -4,8 +4,8 @@
 - [x] user => costumer = cliente
 - [x] mudança dos nomes das tabelas no migration/seeds/models(tableName) para minúsculo
 
-- [] AVISO #1
-- [] AVIDO #2
+- [x] AVISO #1
+- [x] AVISO #2
 
 
 - PROPOSTA PRÓXIMOS DIAS
@@ -34,5 +34,44 @@ Sexta-feira (Time Delivery App)
 
 ** Teste & afins para depois dessa data.
 
+** Falta colocar quantiy na tabela do sales
+** Falta ajustar a data no banco de dados
 
+endpoint                              Req   tela                  back-end        
+localhost:3000/login                  01    Login                 /login
+localhost:3000/register               06    Register              /register    
+localhost:3000/customer/products      09    Home/Header/Card                
+localhost:3000/customer/checkout      16                                  
+localhost:3000/customer/orders/<id>   20 
+localhost:3000/customer/orders        22
+localhost:3000/seller/orders          27    Seller/Header          /sales
+localhost:3000/admin/manage           39
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+trecho de código para avaliação =========================================================
+  authUser: async ({ token, email }) => {
+    try {
+      const response = await api.post('/auth',
+        { email },
+        {
+          headers: {
+            Authorization: token },
+        });
+      return response.data;
+    } catch (error) {
+      return error.response.status;
+    }
+  },
 

@@ -8,8 +8,9 @@ function MainRoutes() {
       <Route path="/" element={ <Navigate to="/login" /> } />
       <Route path="/login" element={ <pages.Login /> } />
       <Route path="/register" element={ <pages.Register /> } />
-      <Route path="/exemplo" element={ <pages.Exemplo /> } />
       <Route path="/customer/products" element={ <pages.Home /> } />
+      <Route path="/admin/manage" element={ <pages.Admin /> } />
+      <Route path="/seller/orders" element={ <pages.Seller /> } />
     </Routes>
   );
 }

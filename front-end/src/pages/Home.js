@@ -1,20 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Card } from '../components';
-import api from '../services/api';
+import http from '../services/api';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [localInfo, setLocalInfo] = useState('');
+  const { current: { token } } = useRef(JSON.parse(localStorage.getItem('user') || ''));
 
-  useEffect(() => {
-    api.get('/products')
-      .then((response) => setProducts(response.data));
-  }, []);
+  const getAllProducts = async () => {
+    setLoading(true);
+    setProducts(await http.getAllProducts());
+    setLoading(false);
+  };
 
+  useEffect(() => { getAllProducts(); }, []);
+
+  if (loading) return <p>Carregando...</p>;
   return (
     <div>
-      <div>
+      <div style={ { display: 'flex', flexDirection: 'row', flexWrap: 'wrap' } }>
         {
-          products.map(({ name, price, url_image: urlImage, id }) => (
+          products.map(({ name, price, urlImage, id }) => (
             <Card
               thumb={ urlImage }
               name={ name }

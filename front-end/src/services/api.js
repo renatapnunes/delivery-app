@@ -21,6 +21,22 @@ const http = {
       return error.response.status;
     }
   },
+  getAllProducts: async () => {
+    try {
+      const response = await api.get('/products');
+      return response.data;
+    } catch (error) {
+      return error.response.status;
+    }
+  },
+  sales: async () => {
+    try {
+      const response = await api.get('/sales');
+      return response.data;
+    } catch (error) {
+      return error.response.status;
+    }
+  },
 };
 
 export default http;

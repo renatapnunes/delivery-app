@@ -20,8 +20,15 @@ function Login() {
     const user = await http.findUser({ email, password });
     if (user === constant.PAGE_404) return setMensagemError(true);
     setMensagemError(false);
-    navigate('/customer/products');
-    console.log(user);
+    window.localStorage.setItem('user', JSON.stringify(user));
+    switch (user.role) {
+    case 'customer':
+      return navigate('/customer/products');
+    case 'seller':
+      return navigate('/seller/orders');
+    default:
+      navigate(0);
+    }
   };
 
   return (
