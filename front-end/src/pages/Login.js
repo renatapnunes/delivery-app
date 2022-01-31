@@ -19,14 +19,17 @@ function Login() {
   const handleLoginButton = async (email, password) => {
     const user = await http.findUser({ email, password });
     if (user === constant.PAGE_404) return setMensagemError(true);
-
+    const token = await http.tokenGenerator({ email, password });
+    const objToLocalStorage = { name: user.name, email, role: user.role, token };
+    window.localStorage.setItem('user', JSON.stringify(objToLocalStorage));
     setMensagemError(false);
-    window.localStorage.setItem('user', JSON.stringify(user));
     switch (user.role) {
     case 'customer':
       return navigate('/customer/products');
     case 'seller':
       return navigate('/seller/orders');
+    case 'administrator':
+      return navigate('/admin/manage');
     default:
       navigate(0);
     }

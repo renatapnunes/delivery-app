@@ -70,5 +70,6 @@ const dataTestIds = {
   73: 'admin_manage__element-user-table-role-',
   74: 'admin_manage__element-user-table-remove-',
   79: 'customer_products__button-cart',
+  80: 'admin_manage__element-invalid-register',
 };
 export default dataTestIds;

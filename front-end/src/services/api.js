@@ -31,12 +31,52 @@ const http = {
       return error.response.status;
     }
   },
+  createUserAdmin: async ({ name, email, password, role, token }) => {
+    try {
+      const response = await api.post('/create-user',
+        { name, email, password, role },
+        {
+          headers: { authorization: token },
+        });
+      return response.data;
+    } catch (error) {
+      return error.response.status;
+    }
+  },
   sales: async () => {
     try {
       const response = await api.get('/sales');
       return response.data;
     } catch (error) {
       return error.response.status;
+    }
+  },
+  getAllUsers: async () => {
+    try {
+      const response = await api.get('/users');
+      return response.data;
+    } catch (error) {
+      return error.response.status;
+    }
+  },
+  tokenGenerator: async ({ email, password }) => {
+    try {
+      const response = await api.post('/token', { email, password });
+      return response.data;
+    } catch (error) {
+      return error.response.status;
+    }
+  },
+  deleteUser: async ({ id, token }) => {
+    try {
+      const response = await api.delete('/delete-user',
+        {
+          data: { id },
+          headers: { authorization: token },
+        });
+      return response.data;
+    } catch (error) {
+      return error;
     }
   },
 };

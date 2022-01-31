@@ -1,3 +1,5 @@
+adm@deliveryapp.com e senha --adm2@21!!--
+
 - [x] problema com o teste (banco de dados não encontrado)
 - [x] eliminar o Exemplo
 - [x] comentar sobre a mudança do arquivo de rota
@@ -48,7 +50,7 @@ localhost:3000/seller/orders          27    Seller/Header          /sales
 localhost:3000/admin/manage           39
 
 
-
+/* eslint-disable react/prop-types */
 
 
 
@@ -75,3 +77,9 @@ trecho de código para avaliação =============================================
     }
   },
 
+
+  "rules": {
+    "react/prop-types": 0
+  }
+
+  última linha

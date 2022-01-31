@@ -23,10 +23,11 @@ function Register() {
   const handleRegisterButton = async (name, email, password) => {
     const create = await http.createUser({ name, email, password });
     if (create === constant.USER_ALREADY_EXISTS) return setMensagemError(true);
+    const token = await http.tokenGenerator({ email, password });
+    const objToLocalStorage = { name, email, role: 'costumer', token };
+    window.localStorage.setItem('user', JSON.stringify(objToLocalStorage));
     navigate('/customer/products');
-    console.log(create);
   };
-
   return (
     <div>
       <div>Nome</div>
