@@ -53,3 +53,4 @@ export default Seller;
 // status: "entregue"
 // totalPrice: "400.00"
 // userId: 1
+// .

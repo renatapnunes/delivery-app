@@ -11,6 +11,8 @@ function MainRoutes() {
       <Route path="/customer/products" element={ <pages.Home /> } />
       <Route path="/admin/manage" element={ <pages.Admin /> } />
       <Route path="/seller/orders" element={ <pages.Seller /> } />
+      <Route path="/customer/checkout" element={ <pages.Checkout /> } />
+      <Route path="/customer/orders/:id" element={ <pages.OrderDetails /> } />
     </Routes>
   );
 }

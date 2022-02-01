@@ -17,6 +17,9 @@ const product = (state = INITIAL_STATE, action) => {
 
     return { ...state, products: newArray };
   }
+  case 'REMOVE': {
+    return { ...state, products: action.payload };
+  }
 
   default: return state;
   }

@@ -1,8 +1,13 @@
-function updateProduct(obj) {
+export function updateProduct(obj) {
   return {
     type: 'UPDATE',
     obj,
   };
 }
 
-export default updateProduct;
+export function removeProduct(payload) {
+  return {
+    type: 'REMOVE',
+    payload,
+  };
+}

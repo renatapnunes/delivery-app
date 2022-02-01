@@ -9,6 +9,8 @@ const UNAUTHORIZED = 401;
 module.exports = (req, _res, next) => {
   try {
     const token = req.headers.authorization;
+    console.log(token);
+    console.log(req.headers);
 
     if (!token) return next({ code: UNAUTHORIZED, message: 'Missing auth token' });
 

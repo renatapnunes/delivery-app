@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import updateProduct from '../redux/actions/productActions';
+import { updateProduct } from '../redux/actions/productActions';
 
 const testIds = {
   15: 'customer_products__element-card-title-',
@@ -18,6 +18,7 @@ const Card = ({ id, thumb, name, price }) => {
   const [suit, setSuit] = useState(false);
   const [cardInfo] = useState(
     {
+      name,
       id,
       quantity: 0,
       totalValue: '',

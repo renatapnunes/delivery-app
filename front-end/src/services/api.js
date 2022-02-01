@@ -79,6 +79,26 @@ const http = {
       return error;
     }
   },
+  getAllSellers: async () => {
+    try {
+      const response = await api.get('/users/sellers');
+      return response.data;
+    } catch (error) {
+      return error.response.status;
+    }
+  },
+  postSale: async ({ values, email, token, products }) => {
+    try {
+      const response = await api.post('/sales',
+        { values, email, products },
+        {
+          headers: { authorization: token },
+        });
+      return response.data;
+    } catch (error) {
+      return error.response.status;
+    }
+  },
 };
 
 export default http;
