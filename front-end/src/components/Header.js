@@ -26,7 +26,7 @@ function Header() {
       </div>
       <div>
         <button
-          name="customer/checkout"
+          name="customer/orders"
           type="button"
           onClick={ (e) => handleChange(e.target) }
           data-testid={ dataTestIds[12] }

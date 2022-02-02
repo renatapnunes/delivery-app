@@ -43,9 +43,21 @@ const http = {
       return error.response.status;
     }
   },
-  sales: async () => {
+  getSales: async ({ token, role, email }) => {
     try {
-      const response = await api.get('/sales');
+      const response = await api.get('/sales',
+        { headers: { authorization: token, data: JSON.stringify({ role, email }) } });
+      return response.data;
+    } catch (error) {
+      return error.response.status;
+    }
+  },
+  getSalesById: async (token, id) => {
+    try {
+      const response = await api.get(`/sales/${id}`, {
+        headers: {
+          authorization: token },
+      });
       return response.data;
     } catch (error) {
       return error.response.status;

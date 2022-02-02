@@ -7,7 +7,7 @@ function Seller() {
   const [loading, setLoading] = useState(true);
 
   const loadingSales = async () => {
-    const salesAPI = await http.sales();
+    const salesAPI = await http.getSales();
     setSales(salesAPI);
     setLoading(false);
   };

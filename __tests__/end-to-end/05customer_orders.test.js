@@ -26,7 +26,6 @@ beforeEach(async () => {
   ).toBeTruthy();
 
   order = await action.customer.createSale(page, itemList);
-
   expect(
     !!order &&
       (await action.common.navigate.goto.homepage(page, "customer")) &&

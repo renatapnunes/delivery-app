@@ -5,7 +5,8 @@ const auth = require('../../middlewares/auth');
 
 const router = express.Router({ mergeParams: true });
 
-router.get('/', getSales);
 router.post('/', auth, insertSales);
+router.get('/', auth, getSales);
+router.get('/:id', auth, getSales);
 
 module.exports = router;
