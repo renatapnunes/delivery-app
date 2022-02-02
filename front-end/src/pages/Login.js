@@ -4,6 +4,7 @@ import emailValidate from '../utils/emailValidate';
 import passwordValidate from '../utils/passwordValidate';
 import http from '../services/api';
 import constant from '../utils/constants';
+import * as C from '../styles/LoginStyle';
 
 function Login() {
   const [inputLogin, setInputLogin] = useState('');
@@ -49,44 +50,47 @@ function Login() {
   };
 
   return (
-    <div>
-      <div>Login</div>
-      <input
-        data-testid="common_login__input-email"
-        id="input-email"
-        value={ inputLogin }
-        onChange={ (event) => setInputLogin(event.target.value) }
-      />
-      <div>Senha</div>
-      <input
-        data-testid="common_login__input-password"
-        id="input-password"
-        value={ inputPassword }
-        onChange={ (event) => setInputPassword(event.target.value) }
-      />
-      <div>
-        <button
-          data-testid="common_login__button-login"
-          type="button"
-          disabled={ !isValidEmailPassword }
-          onClick={ () => handleLoginButton(inputLogin, inputPassword) }
-        >
-          LOGIN
-        </button>
-      </div>
+    <C.ContainerCentralizado>
+      <C.BannerLogo>LOGO</C.BannerLogo>
+      <C.SubContainer>
+        {/* <Text>Login</Text> */}
+        <C.Input
+          data-testid="common_login__input-email"
+          id="input-email"
+          value={ inputLogin }
+          onChange={ (event) => setInputLogin(event.target.value) }
+          placeholder="Digite seu email"
+        />
+      </C.SubContainer>
+      <C.SubContainer>
+        {/* <Text>Senha</Text> */}
+        <C.Input
+          data-testid="common_login__input-password"
+          id="input-password"
+          value={ inputPassword }
+          onChange={ (event) => setInputPassword(event.target.value) }
+          placeholder="Digite sua senha"
+        />
+      </C.SubContainer>
+      <C.Button
+        data-testid="common_login__button-login"
+        type="button"
+        disabled={ !isValidEmailPassword }
+        onClick={ () => handleLoginButton(inputLogin, inputPassword) }
+      >
+        LOGIN
+      </C.Button>
       { mensagemError
         ? <p data-testid="common_login__element-invalid-email">Email/password inválido</p>
         : ''}
-      <div>
-        <button
-          data-testid="common_login__button-register"
-          type="button"
-          onClick={ () => navigate('/register') }
-        >
-          Ainda não tenho conta
-        </button>
-      </div>
-    </div>
+      <C.Button
+        data-testid="common_login__button-register"
+        type="button"
+        onClick={ () => navigate('/register') }
+      >
+        Ainda não tenho conta
+      </C.Button>
+    </C.ContainerCentralizado>
   );
 }
 

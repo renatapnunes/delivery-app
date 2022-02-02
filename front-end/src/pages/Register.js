@@ -5,6 +5,7 @@ import passwordValidate from '../utils/passwordValidate';
 import nameValidate from '../utils/nameValidate';
 import http from '../services/api';
 import constant from '../utils/constants';
+import * as C from '../styles/RegisterStyle';
 
 function Register() {
   const [inputRegisterName, setInputRegisterName] = useState('');
@@ -29,32 +30,36 @@ function Register() {
     navigate('/customer/products');
   };
   return (
-    <div>
-      <div>Nome</div>
-      <input
+    <C.ContainerCentralizado>
+      {/* <div>Nome</div> */}
+      <C.BannerLogo>Cadastro</C.BannerLogo>
+      <C.Input
         data-testid="common_register__input-name"
         id="input-register-name"
         value={ inputRegisterName }
         onChange={ (event) => setInputRegisterName(event.target.value) }
+        placeholder="Digite seu nome"
       />
-      <div>Email</div>
-      <input
+      {/* <div>Email</div> */}
+      <C.Input
         data-testid="common_register__input-email"
         id="input-register-email"
         value={ inputRegisterEmail }
         onChange={ (event) => setInputRegisterEmail(event.target.value) }
+        placeholder="Digite seu email"
       />
-      <div>Senha</div>
-      <input
+      {/* <div>Senha</div> */}
+      <C.Input
         data-testid="common_register__input-password"
         id="input-register-password"
         value={ inputRegisterPassword }
         onChange={ (event) => setInputRegisterPassword(event.target.value) }
+        placeholder="Digite sua senha"
       />
       { mensagemError
       && <p data-testid="common_register__element-invalid_register">Dados inválidos</p>}
       <div>
-        <button
+        <C.Button
           data-testid="common_register__button-register"
           type="button"
           disabled={ !isValidEmailPassword }
@@ -63,9 +68,9 @@ function Register() {
             inputRegisterPassword) }
         >
           CADASTRAR
-        </button>
+        </C.Button>
       </div>
-    </div>);
+    </C.ContainerCentralizado>);
 }
 
 export default Register;
