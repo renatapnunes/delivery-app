@@ -1,22 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateProduct } from '../redux/actions/productActions';
-
-const testIds = {
-  15: 'customer_products__element-card-title-',
-  16: 'customer_products__element-card-price-',
-  17: 'customer_products__img-card-bg-image-',
-  18: 'customer_products__button-card-add-item-',
-  19: 'customer_products__button-card-rm-item-',
-  20: 'customer_products__input-card-quantity-',
-};
+import testIds from '../utils/dataTestIds';
 
 const Card = ({ id, thumb, name, price }) => {
   const dispatch = useDispatch();
+  const store = useSelector((state) => state.products);
+  const { products } = store;
   const [inputValue, setInputValue] = useState(0);
   const [suit, setSuit] = useState(false);
-  const [cardInfo] = useState(
+  const [cardInfo, setCardInfo] = useState(
     {
       name,
       id,
@@ -41,13 +35,24 @@ const Card = ({ id, thumb, name, price }) => {
   };
 
   useEffect(() => {
+    const attQty = products.find(({ id: prodStoreId }) => prodStoreId === id);
+    if (attQty) setInputValue(attQty.quantity);
+  }, []);
+
+  useEffect(() => {
     if (suit) {
       const totalValue = parseFloat((inputValue * cardInfo.price).toFixed(2));
       const quantity = inputValue;
 
-      dispatch(updateProduct({ ...cardInfo, totalValue, quantity }));
+      setCardInfo({ ...cardInfo, quantity, totalValue });
     }
   }, [inputValue]);
+
+  useEffect(() => {
+    if (suit) {
+      dispatch(updateProduct({ ...cardInfo }));
+    }
+  }, [cardInfo]);
 
   return (
     <div

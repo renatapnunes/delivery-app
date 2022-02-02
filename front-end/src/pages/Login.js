@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import emailValidate from '../utils/emailValidate';
 import passwordValidate from '../utils/passwordValidate';
@@ -11,6 +11,13 @@ function Login() {
   const [isValidEmailPassword, setIsValidEmailPassword] = useState(false);
   const [mensagemError, setMensagemError] = useState(false);
   const navigate = useNavigate();
+  const { current: { token, role } } = useRef(
+    JSON.parse(localStorage.getItem('user')) || '',
+  );
+
+  useEffect(() => {
+    if (token && role === 'customer') return navigate('/customer/products');
+  });
 
   useEffect(() => {
     setIsValidEmailPassword(emailValidate(inputLogin) && passwordValidate(inputPassword));
@@ -19,10 +26,16 @@ function Login() {
   const handleLoginButton = async (email, password) => {
     const user = await http.findUser({ email, password });
     if (user === constant.PAGE_404) return setMensagemError(true);
-    const token = await http.tokenGenerator({ email, password });
-    const objToLocalStorage = { name: user.name, email, role: user.role, token };
+    const newToken = await http.tokenGenerator({ email, password });
+    const objToLocalStorage = {
+      name: user.name,
+      email,
+      role: user.role,
+      token: newToken,
+    };
     window.localStorage.setItem('user', JSON.stringify(objToLocalStorage));
     setMensagemError(false);
+
     switch (user.role) {
     case 'customer':
       return navigate('/customer/products');

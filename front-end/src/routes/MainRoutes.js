@@ -10,9 +10,10 @@ function MainRoutes() {
       <Route path="/register" element={ <pages.Register /> } />
       <Route path="/customer/products" element={ <pages.Home /> } />
       <Route path="/admin/manage" element={ <pages.Admin /> } />
-      <Route path="/seller/orders" element={ <pages.Seller /> } />
+      <Route path="/seller/orders" element={ <pages.SellerOrders /> } />
       <Route path="/customer/orders" element={ <pages.CustomerOrders /> } />
       <Route path="/customer/orders/:id" element={ <pages.CustomerDetails /> } />
+      <Route path="/seller/orders/:id" element={ <pages.SellerDetails /> } />
       <Route element={ <pages.NotFound /> } />
       <Route path="/customer/checkout" element={ <pages.Checkout /> } />
     </Routes>
