@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useLocation, useParams } from 'react-router-dom';
+import '../styles/ProductsTable.css';
 
 import dataTestIds from '../utils/dataTestIds';
 
-const tableColumns = ['Item', 'Descrição', 'Quantidade', 'Valor Unitário', 'Sub-total'];
+const tableColumns = ['Item', 'Descrição', 'Qtd.', 'Valor Unitário', 'Sub-total'];
 
 const TableDetails = ({ saleProducts }) => {
   const { Products } = saleProducts;
@@ -45,6 +46,7 @@ const TableDetails = ({ saleProducts }) => {
         {price}
       </td>
       <td
+        className="tbl-customer-seller"
         data-testid={ sellerRoute()
           ? `${dataTestIds[63]}${index}`
           : `${dataTestIds[45]}${index}` }
@@ -57,6 +59,22 @@ const TableDetails = ({ saleProducts }) => {
 
   if (sellerRoute()) {
     return (
+      <div className="tbl-container">
+        <table>
+          <thead>
+            <tr>
+              { tableColumns.map((column, index) => <th key={ index }>{ column }</th>) }
+            </tr>
+          </thead>
+          <tbody>
+            { Products.map((product, index) => fillLine(product, index)) }
+          </tbody>
+        </table>
+      </div>);
+  }
+
+  return (
+    <div className="tbl-container">
       <table>
         <thead>
           <tr>
@@ -66,20 +84,8 @@ const TableDetails = ({ saleProducts }) => {
         <tbody>
           { Products.map((product, index) => fillLine(product, index)) }
         </tbody>
-      </table>);
-  }
-
-  return (
-    <table>
-      <thead>
-        <tr>
-          { tableColumns.map((column, index) => <th key={ index }>{ column }</th>) }
-        </tr>
-      </thead>
-      <tbody>
-        { Products.map((product, index) => fillLine(product, index)) }
-      </tbody>
-    </table>
+      </table>
+    </div>
   );
 };
 

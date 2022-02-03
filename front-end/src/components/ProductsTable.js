@@ -1,19 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import dataTestIds from '../utils/dataTestIds';
+import '../styles/ProductsTable.css';
 
 const ProductsTable = ({ products, removeItem, totalPrice }) => (
-  <div>
-    <table>
+  <div className="tbl-container">
+    <table className="tbl-content">
+      <thead>
+        <th>Item</th>
+        <th>Descrição</th>
+        <th>Qtd.</th>
+        <th>Valor Unitário</th>
+        <th>Sub-total</th>
+        <th> </th>
+      </thead>
       <tbody>
-        <tr>
-          <th>Item</th>
-          <th>Descrição</th>
-          <th>Quantidade</th>
-          <th>Valor Unitário</th>
-          <th>Sub-total</th>
-          <th>Remover</th>
-        </tr>
         {
           products.map(({ id, name, price, quantity }, index) => (
             <tr key={ index }>
@@ -41,7 +42,7 @@ const ProductsTable = ({ products, removeItem, totalPrice }) => (
               </td>
               <td data-testid={ `${dataTestIds[27]}${index}` }>
                 <button type="button" onClick={ () => removeItem(id) }>
-                  Remover
+                  X
                 </button>
               </td>
             </tr>
@@ -49,13 +50,15 @@ const ProductsTable = ({ products, removeItem, totalPrice }) => (
         }
       </tbody>
     </table>
-    <span data-testid={ dataTestIds[28] }>
-      Total:
-      {' '}
-      {
-        (parseFloat(totalPrice).toFixed(2)).replace('.', ',')
-      }
-    </span>
+    <div className="total-container">
+      <span data-testid={ dataTestIds[28] } className="total-price">
+        Total:
+        {' '}
+        {
+          (parseFloat(totalPrice).toFixed(2)).replace('.', ',')
+        }
+      </span>
+    </div>
   </div>
 );
 

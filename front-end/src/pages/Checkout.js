@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ProductsTable, FinalizeOrder } from '../components';
+import { ProductsTable, FinalizeOrder, Header } from '../components';
 import { removeProduct } from '../redux/actions/productActions';
 import http from '../services/api';
 
@@ -38,6 +38,7 @@ const Checkout = () => {
 
   return (
     <div>
+      <Header />
       <ProductsTable
         products={ products }
         removeItem={ removeItem }

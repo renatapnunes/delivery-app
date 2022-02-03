@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import PropTypes from 'prop-types';
 import dataTestIds from '../utils/dataTestIds';
 import http from '../services/api';
+import '../styles/FinalizeOrder.css';
 
 const FinalizeOrder = ({ sellers, total, products }) => {
   const initialValues = {
@@ -34,57 +35,59 @@ const FinalizeOrder = ({ sellers, total, products }) => {
   }
 
   return (
-    <div>
+    <div className="form-container">
       <h3>Detalhes e Endereço para Entrega</h3>
       <form onSubmit={ onSubmit }>
-        <label htmlFor="seller">
-          P. Vendedora Responsável:
-          <select
-            name="sellerId"
-            id="seller"
-            data-testid={ `${dataTestIds[29]}` }
-            onChange={ handleChange }
-            required
+        <div className="input-container">
+          <label htmlFor="seller">
+            P. Vendedora Responsável:
+            <select
+              name="sellerId"
+              id="seller"
+              data-testid={ `${dataTestIds[29]}` }
+              onChange={ handleChange }
+              required
+            >
+              {
+                sellers.map(({ id, name }) => (
+                  <option key={ id } value={ id }>{name}</option>
+                ))
+              }
+            </select>
+          </label>
+          <label htmlFor="deliveryAddress">
+            Endereço:
+            <input
+              type="text"
+              id="deliveryAddress"
+              name="deliveryAddress"
+              data-testid={ `${dataTestIds[30]}` }
+              onChange={ handleChange }
+              required
+              minLength="1"
+              maxLength="100"
+            />
+          </label>
+          <label htmlFor="deliveryNumber">
+            Número:
+            <input
+              type="number"
+              id="deliveryNumber"
+              data-testid={ `${dataTestIds[31]}` }
+              name="deliveryNumber"
+              onChange={ handleChange }
+              required
+              pattern="^[0-9]"
+              min="1"
+            />
+          </label>
+          <button
+            type="submit"
+            data-testid={ `${dataTestIds[32]}` }
           >
-            {
-              sellers.map(({ id, name }) => (
-                <option key={ id } value={ id }>{name}</option>
-              ))
-            }
-          </select>
-        </label>
-        <label htmlFor="deliveryAddress">
-          Endereço:
-          <input
-            type="text"
-            id="deliveryAddress"
-            name="deliveryAddress"
-            data-testid={ `${dataTestIds[30]}` }
-            onChange={ handleChange }
-            required
-            minLength="1"
-            maxLength="100"
-          />
-        </label>
-        <label htmlFor="deliveryNumber">
-          Número:
-          <input
-            type="number"
-            id="deliveryNumber"
-            data-testid={ `${dataTestIds[31]}` }
-            name="deliveryNumber"
-            onChange={ handleChange }
-            required
-            pattern="^[0-9]"
-            min="1"
-          />
-        </label>
-        <button
-          type="submit"
-          data-testid={ `${dataTestIds[32]}` }
-        >
-          Finalizar Pedido
-        </button>
+            Finalizar Pedido
+          </button>
+        </div>
       </form>
     </div>
   );
