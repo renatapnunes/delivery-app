@@ -1,3 +1,4 @@
 html {
-  background: #F2EFEB;
+  background-image: url('./images/pattern.png');
+  background-repeat: repeat;
 }
