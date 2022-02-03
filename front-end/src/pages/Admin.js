@@ -7,6 +7,7 @@ import http from '../services/api';
 import constant from '../utils/constants';
 import dataTestIds from '../utils/dataTestIds';
 import Table from '../components/Table';
+import * as C from '../styles/AdmStyle';
 
 function Admin() {
   const [inputNameUser, setInputNameUser] = useState('');
@@ -17,12 +18,14 @@ function Admin() {
   const [mensagemError, setMensagemError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState('');
-  const { current: { token } } = useRef(JSON.parse(localStorage.getItem('user')) || '');
+  const {
+    current: { token },
+  } = useRef(JSON.parse(localStorage.getItem('user')) || '');
 
   useEffect(() => {
     setValidValues(nameValidate(inputNameUser)
-    && emailValidate(inputEmailUser)
-    && passwordValidate(inputPasswordUser));
+        && emailValidate(inputEmailUser)
+        && passwordValidate(inputPasswordUser));
   }, [inputNameUser, inputEmailUser, inputPasswordUser]);
 
   const getUser = async () => {
@@ -32,12 +35,20 @@ function Admin() {
   };
 
   const handleButtonRegister = async (name, email, password, role) => {
-    const create = await http.createUserAdmin({ name, email, password, role, token });
+    const create = await http.createUserAdmin({
+      name,
+      email,
+      password,
+      role,
+      token,
+    });
     if (create === constant.USER_ALREADY_EXISTS) return setMensagemError(true);
     getUser();
   };
 
-  useEffect(() => { getUser(); }, []);
+  useEffect(() => {
+    getUser();
+  }, []);
 
   const deleteID = async (id) => {
     await http.deleteUser({ id, token });
@@ -48,35 +59,38 @@ function Admin() {
   return (
     <div>
       <Header />
-      { mensagemError && <p data-testid={ `${dataTestIds[80]}` }>Cadastro existente</p>}
-      <section style={ { display: 'flex' } }>
+      {mensagemError && (
+        <p data-testid={ `${dataTestIds[80]}` }>Cadastro existente</p>
+      )}
+      <C.FieldsetRegister>
+        <legend>Cadastrar novo usuário</legend>
         <div>
-          <p>Nome</p>
-          <input
+          <C.Input
+            className="nome"
             data-testid="admin_manage__input-name"
             value={ inputNameUser }
             onChange={ (event) => setInputNameUser(event.target.value) }
+            placeholder="Nome"
           />
         </div>
         <div>
-          <p>Email</p>
-          <input
+          <C.Input
             data-testid="admin_manage__input-email"
             value={ inputEmailUser }
             onChange={ (event) => setInputEmailUser(event.target.value) }
+            placeholder="Email"
           />
         </div>
         <div>
-          <p>Senha</p>
-          <input
+          <C.Input
             data-testid="admin_manage__input-password"
             value={ inputPasswordUser }
             onChange={ (event) => setInputPasswordUser(event.target.value) }
+            placeholder="Senha"
           />
         </div>
         <div>
-          <p>Tipo</p>
-          <select
+          <C.Select
             name="tipo"
             id="tipo"
             data-testid="admin_manage__select-role"
@@ -86,34 +100,26 @@ function Admin() {
             <option value="seller">Vendedor</option>
             <option value="customer">Cliente</option>
             <option value="administrador">Administrador</option>
-          </select>
+          </C.Select>
         </div>
-        <button
+        <C.Button
           data-testid="admin_manage__button-register"
           type="button"
           disabled={ !validateValues }
-          onClick={ () => handleButtonRegister(
-            inputNameUser,
+          onClick={ () => handleButtonRegister(inputNameUser,
             inputEmailUser,
             inputPasswordUser,
-            inputTypeUser,
-          ) }
+            inputTypeUser) }
         >
           CADASTRAR
-        </button>
-      </section>
-      <p>Lista de usuários</p>
-      <div>
+        </C.Button>
+      </C.FieldsetRegister>
+      <C.FieldsetTable>
+        <legend>Lista de usuários</legend>
         <Table users={ users } func={ deleteID } />
-      </div>
-    </div>);
+      </C.FieldsetTable>
+    </div>
+  );
 }
 
 export default Admin;
-
-// users
-// email: "adm@deliveryapp.com"
-// id: 1
-// name: "Delivery App Admin"
-// password: "a4c86edecc5aee06eff8fdeda69e0d04"
-// role: "administrator"

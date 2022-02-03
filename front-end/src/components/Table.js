@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import dataTestIds from '../utils/dataTestIds';
+import * as C from '../styles/TableStyle';
 
 function Table({ users, func }) {
   const { current: { email: emailLocalStorage } } = useRef(
@@ -13,10 +14,10 @@ function Table({ users, func }) {
   }, [users]);
 
   return (
-    <table>
+    <C.TableContent>
       <thead>
         <tr>
-          <th>id</th>
+          <th>Id</th>
           <th>Nome</th>
           <th>Email</th>
           <th>Tipo</th>
@@ -31,18 +32,18 @@ function Table({ users, func }) {
             <td data-testid={ `${dataTestIds[72]}${id}` }>{ email }</td>
             <td data-testid={ `${dataTestIds[73]}${id}` }>{ role }</td>
             <td>
-              <button
+              <C.Button
                 type="button"
                 data-testid={ `${dataTestIds[74]}${id}` }
                 onClick={ () => func(id) }
               >
                 Excluir
-              </button>
+              </C.Button>
             </td>
           </tr>
         ))}
       </tbody>
-    </table>
+    </C.TableContent>
   );
 }
 

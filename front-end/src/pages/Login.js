@@ -5,6 +5,7 @@ import passwordValidate from '../utils/passwordValidate';
 import http from '../services/api';
 import constant from '../utils/constants';
 import * as C from '../styles/LoginStyle';
+import logo from '../images/logoBlack.png';
 
 function Login() {
   const [inputLogin, setInputLogin] = useState('');
@@ -51,9 +52,8 @@ function Login() {
 
   return (
     <C.ContainerCentralizado>
-      <C.BannerLogo>LOGO</C.BannerLogo>
+      <C.BannerLogo src={ logo } alt="logo" onClick={ () => navigate('/register') } />
       <C.SubContainer>
-        {/* <Text>Login</Text> */}
         <C.Input
           data-testid="common_login__input-email"
           id="input-email"
@@ -63,7 +63,6 @@ function Login() {
         />
       </C.SubContainer>
       <C.SubContainer>
-        {/* <Text>Senha</Text> */}
         <C.Input
           data-testid="common_login__input-password"
           id="input-password"

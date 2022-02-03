@@ -6,6 +6,7 @@ import nameValidate from '../utils/nameValidate';
 import http from '../services/api';
 import constant from '../utils/constants';
 import * as C from '../styles/RegisterStyle';
+import logo from '../images/logoBlack.png';
 
 function Register() {
   const [inputRegisterName, setInputRegisterName] = useState('');
@@ -31,8 +32,7 @@ function Register() {
   };
   return (
     <C.ContainerCentralizado>
-      {/* <div>Nome</div> */}
-      <C.BannerLogo>Cadastro</C.BannerLogo>
+      <C.BannerLogo src={ logo } alt="logo" onClick={ () => navigate('/login') } />
       <C.Input
         data-testid="common_register__input-name"
         id="input-register-name"

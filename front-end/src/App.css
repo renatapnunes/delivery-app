@@ -1,4 +1,4 @@
 html {
-  background-image: url('./images/pattern.png');
+  background-image: url("./images/pattern.png");
   background-repeat: repeat;
 }
