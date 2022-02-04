@@ -6,6 +6,8 @@ import http from '../services/api';
 import dataTestIds from '../utils/dataTestIds';
 import { TableDetails, Header } from '../components';
 
+import '../styles/detailsPage.css';
+
 const CustomerOrders = () => {
   const [loading, setLoading] = useState(true);
   const [saleProducts, setSaleProducts] = useState({});
@@ -13,6 +15,11 @@ const CustomerOrders = () => {
   const [seller, setSeller] = useState('');
 
   const date = moment(Date.parse(saleDate)).format('DD/MM/YYYY');
+  const statusColor = {
+    Pendente: '#f9bd59',
+    Preparando: '#f45757',
+    Entregue: '#0aa050',
+  };
 
   const { id } = useParams();
 
@@ -41,19 +48,41 @@ const CustomerOrders = () => {
   return (
     <div>
       <Header />
-      <div>
-        <div data-testid={ dataTestIds[37] }>{ `Pedido ${id}` }</div>
-        <div data-testid={ dataTestIds[38] }>{ `P. Vend ${seller}` }</div>
-        <div data-testid={ dataTestIds[39] }>{ date }</div>
-        <div data-testid={ dataTestIds[40] }>{ status }</div>
-        <button type="button" disabled data-testid={ dataTestIds[47] }>
-          MARCAR COMO ENTREGUE
-        </button>
-      </div>
-      <div>
+      <div className="container-seller-customer-details">
+        <div className="order-details">
+          <div
+            className="details-id"
+            data-testid={ dataTestIds[37] }
+          >
+            { `Pedido ${id}` }
+          </div>
+          <div
+            className="seller-customer"
+            data-testid={ dataTestIds[38] }
+          >
+            { `P. Vend ${seller}` }
+          </div>
+          <div className="details-date" data-testid={ dataTestIds[39] }>{ date }</div>
+          <div
+            className="details-status"
+            style={ { backgroundColor:
+              status === 'Em Trânsito' ? '#ac203d' : statusColor[status] } }
+            data-testid={ dataTestIds[40] }
+          >
+            { status }
+          </div>
+          <button
+            className="change-status"
+            type="button"
+            disabled
+            data-testid={ dataTestIds[47] }
+          >
+            MARCAR COMO ENTREGUE
+          </button>
+        </div>
         <TableDetails saleProducts={ saleProducts } />
-        <div>
-          Total: R$
+        <div className="details-total-price">
+          <span>Total: R$</span>
           <span data-testid={ dataTestIds[45] }>{totalPrice.replace('.', ',')}</span>
         </div>
       </div>

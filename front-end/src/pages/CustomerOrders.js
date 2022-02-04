@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import http from '../services/api';
 import { CardOrders, Header } from '../components';
+import '../styles/cardOrders.css';
 
 const CustomerOrders = () => {
   const [loading, setLoading] = useState(true);
@@ -27,7 +28,7 @@ const CustomerOrders = () => {
   return (
     <>
       <Header />
-      <div>
+      <div className="container-card-order">
         { sales.map((sale) => <CardOrders sale={ sale } key={ sale.id } />) }
       </div>
     </>

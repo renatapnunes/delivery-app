@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { CardOrders } from '../components'; import Header from '../components/Header';
 import http from '../services/api';
+import '../styles/cardOrders.css';
 
 function SellerOrders() {
   const [sales, setSales] = useState('');
@@ -24,7 +25,7 @@ function SellerOrders() {
   return (
     <>
       <Header />
-      <div>
+      <div className="container-card-order">
         { sales.map((sale) => <CardOrders sale={ sale } key={ sale.id } />) }
       </div>
     </>);
