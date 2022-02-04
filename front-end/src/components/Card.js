@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateProduct } from '../redux/actions/productActions';
+import { updateProduct, removeProduct } from '../redux/actions/productActions';
 import testIds from '../utils/dataTestIds';
+import '../styles/ProductCards.css';
 
 const Card = ({ id, thumb, name, price }) => {
   const dispatch = useDispatch();
@@ -12,8 +13,8 @@ const Card = ({ id, thumb, name, price }) => {
   const [suit, setSuit] = useState(false);
   const [cardInfo, setCardInfo] = useState(
     {
-      name,
       id,
+      name,
       quantity: 0,
       totalValue: '',
       price: parseFloat(price),
@@ -27,16 +28,17 @@ const Card = ({ id, thumb, name, price }) => {
 
   const handleChange = (btnName) => {
     if (btnName === 'addButton') {
-      setSuit(true);
-      return setInputValue(inputValue + 1);
-    }
-
-    if (inputValue > 0) setInputValue(inputValue - 1);
+      setInputValue(inputValue + 1);
+    } else if (inputValue > 0) setInputValue(inputValue - 1);
+    setSuit(true);
   };
 
   useEffect(() => {
-    const attQty = products.find(({ id: prodStoreId }) => prodStoreId === id);
-    if (attQty) setInputValue(attQty.quantity);
+    const arrayPos = products.findIndex((p) => p.id === id);
+    if (arrayPos >= 0) {
+      setInputValue(products[arrayPos].quantity);
+      setCardInfo(products[arrayPos]);
+    }
   }, []);
 
   useEffect(() => {
@@ -50,6 +52,9 @@ const Card = ({ id, thumb, name, price }) => {
 
   useEffect(() => {
     if (suit) {
+      if (inputValue === 0) {
+        return dispatch(removeProduct(products.filter((p) => p.id !== id)));
+      }
       dispatch(updateProduct({ ...cardInfo }));
     }
   }, [cardInfo]);
@@ -58,26 +63,32 @@ const Card = ({ id, thumb, name, price }) => {
     <div
       className="product-card"
     >
-      <h3
-        data-testid={ `${testIds[16]}${id}` }
+      <img
+        data-testid={ `${testIds[17]}${id}` }
+        src={ thumb }
+        alt={ `Uma garrafa de ${name}` }
+        className="thumb"
+      />
+      <div
+        className="product-info"
       >
-        { `R$ ${price.replace('.', ',')}` }
-      </h3>
-      <div className="image-container">
-        <img
-          data-testid={ `${testIds[17]}${id}` }
-          src={ thumb }
-          alt={ `Uma garrafa de ${name}` }
-          className="thumb"
-        />
+        <h3
+          className="price-product"
+          data-testid={ `${testIds[16]}${id}` }
+        >
+          { `R$ ${price.replace('.', ',')}` }
+        </h3>
+        <h4
+          className="product-name"
+          data-testid={ `${testIds[15]}${id}` }
+        >
+          { name }
+        </h4>
+
       </div>
-      <span
-        data-testid={ `${testIds[15]}${id}` }
-      >
-        { name }
-      </span>
-      <div className="buttons">
+      <div className="qty-container">
         <button
+          className="qty-plus-button"
           value={ price }
           type="button"
           onClick={ (e) => handleChange(e.target.name) }
@@ -88,6 +99,7 @@ const Card = ({ id, thumb, name, price }) => {
           +
         </button>
         <input
+          className="qty-input"
           name="inputQuantity"
           id={ id }
           value={ inputValue }
@@ -97,6 +109,7 @@ const Card = ({ id, thumb, name, price }) => {
           data-testid={ `${testIds[20]}${id}` }
         />
         <button
+          className="qty-minus-button"
           id={ id }
           value={ price }
           type="button"

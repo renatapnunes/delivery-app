@@ -35,6 +35,16 @@ function HeaderCostumer() {
 
   return (
     <>
+      <div
+        className="userName"
+        data-testid={ dataTestIds[13] }
+      >
+        <p
+          className="user"
+        >
+          { name }
+        </p>
+      </div>
       <svg className="headerBack" height="480" width="440">
         <path
           d="M400 120 H200 V480 C280 480 280 440 280 240 C280 240 280 200 320 200 C400
@@ -89,12 +99,6 @@ function HeaderCostumer() {
           />
           <span className="hidden">PEDIDOS</span>
         </button>
-        <div
-          className="userName"
-          data-testid={ dataTestIds[13] }
-        >
-          { name }
-        </div>
         <button
           className="icon logoff"
           data-testid={ dataTestIds[14] }

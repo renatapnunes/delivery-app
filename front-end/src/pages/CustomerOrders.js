@@ -26,12 +26,12 @@ const CustomerOrders = () => {
   if (loading) return <h1>Carregando...</h1>;
 
   return (
-    <>
+    <div className="content">
       <Header />
       <div className="container-card-order">
         { sales.map((sale) => <CardOrders sale={ sale } key={ sale.id } />) }
       </div>
-    </>
+    </div>
   );
 };
 

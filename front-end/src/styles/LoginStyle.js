@@ -50,6 +50,7 @@ export const Button = styled.button`
   height: 40px;
   border: 0;
   border-radius: 8px;
+  cursor: pointer;
   
   &:disabled {
       background: rgba(255, 104, 89, .4);

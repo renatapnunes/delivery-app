@@ -45,6 +45,8 @@ export const Button = styled.button`
   font-weight: bold;
   color: #000000;
   background: rgba(255, 104, 89);
+  cursor: pointer;
+
 
   &:hover,
   &:active {

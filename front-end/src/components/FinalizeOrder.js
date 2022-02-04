@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { removeProduct } from '../redux/actions/productActions';
 import dataTestIds from '../utils/dataTestIds';
 import http from '../services/api';
 import '../styles/FinalizeOrder.css';
@@ -13,6 +15,8 @@ const FinalizeOrder = ({ sellers, total, products }) => {
     status: 'Pendente',
     totalPrice: total,
   };
+
+  const dispatch = useDispatch();
 
   const { token, email } = (JSON.parse(localStorage.getItem('user')) || '');
 
@@ -28,9 +32,10 @@ const FinalizeOrder = ({ sellers, total, products }) => {
   async function onSubmit(event) {
     event.preventDefault();
     const productsToSend = products.map(({ id, quantity }) => ({ id, quantity }));
-    console.log(productsToSend);
     const { id } = await http
       .postSale({ values, email, token, products: productsToSend });
+
+    dispatch(removeProduct([]));
     navigate(`/customer/orders/${id}`);
   }
 

@@ -30,19 +30,21 @@ const Home = () => {
   if (loading) return <h1>Carregando</h1>;
 
   return (
-    <div className="products-container">
+    <div className="content">
       <Header />
       <button
+        className="price-button"
         type="button"
         disabled={ total <= 0 }
         data-testid={ dataTestIds[79] }
         onClick={ () => navigate('/customer/checkout') }
       >
         <h3
+          className="total-price-output"
           data-testid={ dataTestIds[21] }
         >
           {
-            `Ver carrinho: R$ ${(parseFloat(total).toFixed(2)).replace('.', ',')}`
+            `R$ ${(parseFloat(total).toFixed(2)).replace('.', ',')}`
           }
         </h3>
       </button>

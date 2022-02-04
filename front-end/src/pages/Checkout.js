@@ -37,7 +37,7 @@ const Checkout = () => {
   }
 
   return (
-    <div>
+    <div className="content">
       <Header />
       <ProductsTable
         products={ products }

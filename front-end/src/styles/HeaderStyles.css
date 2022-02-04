@@ -1,12 +1,23 @@
-body {
-  margin-left: 180px;
+/* body {
+  padding-left: 180px;
+  padding-top: 50px;
+} */
+
+.content {
+  bottom: 0;
+  left: 200px;
+  overflow-y: scroll;
+  position: fixed;
+  right: 0;
+  top: 51px;
 }
 
 .headerBack {
+  background-color: transparent;
   left: 2px;
   position: fixed;
+  top: 0;
   transform: translate(-50%, -25%);
-  z-index: 1;
 }
 
 .logo {
@@ -14,13 +25,6 @@ body {
   left: 15px;
   position: fixed;
   top: 15px;
-  z-index: 2;
-}
-
-.navIcons {
-  background-color: rgb(207, 207, 207);
-  border-bottom: solid 1px black;
-  height: 50px;
 }
 
 .icon {
@@ -29,6 +33,7 @@ body {
   border: none;
   border-radius: 100%;
   color: transparent;
+  cursor: pointer;
   display: flex;
   height: 50px;
   justify-content: center;
@@ -37,7 +42,6 @@ body {
   padding: 0;
   position: fixed;
   width: 50px;
-  z-index: 2;
 }
 
 .icon:disabled {
@@ -80,7 +84,7 @@ body {
 }
 
 .selected {
-  background-color: coral;
+  background: linear-gradient(to bottom, #bc7012 0%, #efd002 100%);
 }
 
 .hidden {
@@ -88,20 +92,26 @@ body {
 }
 
 .userName {
-  background-color: transparent;
-  color: black;
+  align-items: center;
+  background-color: rgb(207, 207, 207);
+  border-bottom: solid 1px black;
+  display: flex;
   font-size: 20px;
   font-weight: 500;
-  left: 50vw;
-  margin: 0;
-  padding: 0;
+  height: 50px;
+  justify-content: center;
+  left: 0;
   position: fixed;
-  top: 15px;
+  top: 0;
+  width: 100vw;
 }
 
 .productsQty {
-  background-color: rgb(155, 0, 0);
+  background: linear-gradient(to bottom, #bc7012 0%, #efd002 100%);
+  border: 2px solid black;
   border-radius: 100%;
+  color: black;
+  font-weight: 500;
   height: 20px;
   left: 40px;
   opacity: 1;
@@ -110,7 +120,6 @@ body {
   top: 155px;
   transition: all 0.2s ease-in;
   width: 20px;
-  z-index: 3;
 }
 
 .noOpacity {

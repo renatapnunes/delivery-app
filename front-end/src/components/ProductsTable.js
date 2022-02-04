@@ -7,12 +7,14 @@ const ProductsTable = ({ products, removeItem, totalPrice }) => (
   <div className="tbl-container">
     <table className="tbl-content">
       <thead>
-        <th>Item</th>
-        <th>Descrição</th>
-        <th>Qtd.</th>
-        <th>Valor Unitário</th>
-        <th>Sub-total</th>
-        <th> </th>
+        <tr>
+          <th>Item</th>
+          <th>Descrição</th>
+          <th>Qtd.</th>
+          <th>Valor Unitário</th>
+          <th>Sub-total</th>
+          <th> </th>
+        </tr>
       </thead>
       <tbody>
         {

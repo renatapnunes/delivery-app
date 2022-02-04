@@ -6,7 +6,7 @@ import nameValidate from '../utils/nameValidate';
 import http from '../services/api';
 import constant from '../utils/constants';
 import * as C from '../styles/RegisterStyle';
-import logo from '../images/logoBlack.png';
+import logo from '../images/yellowlogo.png';
 
 function Register() {
   const [inputRegisterName, setInputRegisterName] = useState('');

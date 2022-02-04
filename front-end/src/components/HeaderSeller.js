@@ -23,6 +23,16 @@ function HeaderSeller() {
 
   return (
     <>
+      <div
+        className="userName"
+        data-testid={ dataTestIds[13] }
+      >
+        <p
+          className="user"
+        >
+          { name }
+        </p>
+      </div>
       <svg className="headerBack" height="480" width="440">
         <path
           d="M440 120 H200 V340 C240 340 280 340 280 250 L280 240 C280 240 280 200 320
@@ -46,28 +56,22 @@ function HeaderSeller() {
           />
           <span className="hidden">PEDIDOS</span>
         </button>
-        <div
-          className="userName"
-          data-testid={ dataTestIds[13] }
-        >
-          { name }
-        </div>
-        <button
-          className="icon logoffSeller"
-          data-testid={ dataTestIds[14] }
-          name="login"
-          onClick={ ({ target }) => handleChange(target) }
-          type="button"
-        >
-          <img
-            alt="Botão para fazer Log-Off"
-            className="iconImg"
-            name="login"
-            src={ logoff }
-          />
-          <span className="hidden">Sair</span>
-        </button>
       </div>
+      <button
+        className="icon logoffSeller"
+        data-testid={ dataTestIds[14] }
+        name="login"
+        onClick={ ({ target }) => handleChange(target) }
+        type="button"
+      >
+        <img
+          alt="Botão para fazer Log-Off"
+          className="iconImg"
+          name="login"
+          src={ logoff }
+        />
+        <span className="hidden">Sair</span>
+      </button>
     </>
   );
 }

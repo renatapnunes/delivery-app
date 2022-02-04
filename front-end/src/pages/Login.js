@@ -5,7 +5,7 @@ import passwordValidate from '../utils/passwordValidate';
 import http from '../services/api';
 import constant from '../utils/constants';
 import * as C from '../styles/LoginStyle';
-import logo from '../images/logoBlack.png';
+import logo from '../images/yellowlogo.png';
 
 function Login() {
   const [inputLogin, setInputLogin] = useState('');
@@ -69,6 +69,7 @@ function Login() {
           value={ inputPassword }
           onChange={ (event) => setInputPassword(event.target.value) }
           placeholder="Digite sua senha"
+          type="password"
         />
       </C.SubContainer>
       <C.Button

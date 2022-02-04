@@ -41,12 +41,12 @@ const CustomerOrders = () => {
     };
 
     getSales();
-  }, []);
+  }, [saleProducts]);
 
   if (loading) return <h1>Carregando...</h1>;
 
   return (
-    <div>
+    <div className="content">
       <Header />
       <div className="container-seller-customer-details">
         <div className="order-details">
